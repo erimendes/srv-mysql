@@ -20,7 +20,7 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: senha
-#    volumes:
+##    volumes:
 ##      - ./bdm1-data:/var/lib/mysql
     networks:
       - backend
