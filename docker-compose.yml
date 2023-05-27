@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx
+    container_name: 'balancemsql'
+    restart: unless-stopped
+    ports:
+      - '8080:8080'
+      - '4020:4020'
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - backend
+
+  bdm1:
+    image: mysql:latest
+    container_name: bdm1
+    command: --server-id=1 --log-bin=mysql-bin --binlog-format=row --gtid-mode=ON --enforce-gtid-consistency=true --default-authentication-plugin=mysql_nati>    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: senha
+    volumes:
+      - ./bdm1-data:/var/lib/mysql
+    networks:
+      - backend
+  bdm2:
+    image: mysql:latest
+    container_name: bdm2
+    command: --server-id=2 --log-bin=mysql-bin --binlog-format=row --gtid-mode=ON --enforce-gtid-consistency=true --default-authentication-plugin=mysql_nati>    depends_on:
+      - bdm1
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: senha
+    volumes:
+      - ./bdm2-data:/var/lib/mysql
+    networks:
+      - backend
+
+networks:
+  backend:
