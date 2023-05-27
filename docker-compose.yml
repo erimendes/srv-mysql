@@ -21,7 +21,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: senha
 #    volumes:
-#      - ./bdm1-data:/var/lib/mysql
+##      - ./bdm1-data:/var/lib/mysql
     networks:
       - backend
   bdm2:
