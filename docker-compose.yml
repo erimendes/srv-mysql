@@ -16,7 +16,8 @@ services:
   bdm1:
     image: mysql:latest
     container_name: bdm1
-    command: --server-id=1 --log-bin=mysql-bin --binlog-format=row --gtid-mode=ON --enforce-gtid-consistency=true --default-authentication-plugin=mysql_nati>    restart: always
+    command: --server-id=1 --log-bin=mysql-bin --binlog-format=row --gtid-mode=ON --enforce-gtid-consistency=true --default-authentication-plugin=mysql_nati>    
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: senha
     volumes:
@@ -26,7 +27,8 @@ services:
   bdm2:
     image: mysql:latest
     container_name: bdm2
-    command: --server-id=2 --log-bin=mysql-bin --binlog-format=row --gtid-mode=ON --enforce-gtid-consistency=true --default-authentication-plugin=mysql_nati>    depends_on:
+    command: --server-id=2 --log-bin=mysql-bin --binlog-format=row --gtid-mode=ON --enforce-gtid-consistency=true --default-authentication-plugin=mysql_nati>    
+    depends_on:
       - bdm1
     restart: always
     environment:
